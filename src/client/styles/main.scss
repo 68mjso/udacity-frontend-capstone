@@ -1,0 +1,42 @@
+#travelMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #eee;
+  gap: 2rem;
+  align-items: center;
+  img {
+    object-fit: cover;
+    width: 200px;
+  }
+
+  .travel-details {
+    display: flex;
+    flex-direction: column;
+    h2 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+  }
+  .buttons {
+    margin-bottom: 10px;
+    button {
+      padding: 8px 12px;
+      margin-right: 10px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      &:hover {
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #travelMain {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}

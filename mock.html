@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Planner</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .travel-card {
+        border: 1px solid #eee;
+        background-color: #fbeaea;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .travel-card img {
+        max-width: 150px;
+        max-height: 100px;
+        border-radius: 8px;
+        margin-right: 20px;
+      }
+      .travel-details {
+        flex: 1;
+      }
+      .travel-details h2 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+      }
+      .travel-details strong {
+        display: block;
+        margin-bottom: 10px;
+      }
+      .buttons {
+        margin-bottom: 10px;
+      }
+      .buttons button {
+        padding: 8px 12px;
+        margin-right: 10px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        cursor: pointer;
+      }
+      .buttons button:hover {
+        background-color: #eee;
+      }
+      .weather-info {
+        font-size: 14px;
+      }
+      .weather-info .temperature {
+        font-size: 12px;
+        margin-top: 10px;
+      }
+      .weather-info .description {
+        margin-top: 5px;
+        font-style: italic;
+      }
+
+      /* Media Query for smaller screens (like mobile) */
+      @media (max-width: 600px) {
+        .container {
+          margin: 20px;
+          padding: 15px;
+        }
+        .travel-card {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .travel-card img {
+          max-width: 100%;
+          max-height: auto;
+          margin-right: 0;
+          margin-bottom: 15px;
+        }
+        .buttons button {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+        .buttons {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Travel Planner</h1>
+      <div class="travel-card">
+        <img src="https://via.placeholder.com/150" alt="Travel Image" />
+        <div class="travel-details">
+          <h2>My trip to: Paris, France</h2>
+          <strong>Departing: 02/12/2020</strong>
+          <div class="buttons">
+            <button>Save Trip</button>
+            <button>Remove Trip</button>
+          </div>
+          <p>Paris, France is 720 days away</p>
+          <div class="weather-info">
+            <p>Typical weather for then is:</p>
+            <div class="temperature">
+              <span>High: 46°F</span>, <span>Low: 35°F</span>
+            </div>
+            <div class="description">Mostly cloudy throughout the day.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

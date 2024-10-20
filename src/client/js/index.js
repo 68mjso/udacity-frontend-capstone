@@ -1,9 +1,7 @@
 const serverURL = "http://localhost:8000";
 
-const form = document.getElementById("urlForm");
-if (form) {
-  form.addEventListener("submit", handleSubmit);
-}
+const saveBtn = document.getElementById("saveTrip");
+const removeBtn = document.getElementById("removeTrip");
 
 function handleSubmit(event) {
   event.preventDefault();

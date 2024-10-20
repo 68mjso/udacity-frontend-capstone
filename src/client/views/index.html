@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Test</title>
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Planner</title>
+  </head>
 
-    <body>
-
-        <header>
-            <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
-            </div>
-        </header>
-
-        <main>
-            <section>
-                <form id="urlForm">
-                    <input id="name" type="text" name="url" placeholder="Enter URL" required>
-                    <button id="submitButton" type="submit">Submit</button>
-                </form>
-                
-            </section>
-
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
-            </section>
-        </main>
-
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-
-    </body>
+  <body>
+    <header>
+      <h1>Travel Planner</h1>
+    </header>
+    <main>
+      <section id="travelMain">
+        <img
+          src="https://images.pexels.com/photos/2363/france-landmark-lights-night.jpg?cs=srgb&dl=pexels-pixabay-2363.jpg&fm=jpg"
+        />
+        <div class="travel-details">
+          <h2>My trip to: Paris, France</h2>
+          <h2>Departing: 02/12/2020</h2>
+          <div class="buttons">
+            <button id="saveTrip">Save Trip</button>
+            <button id="removeTrip">Remove Trip</button>
+          </div>
+          <p>Paris, France is 220 days away</p>
+          <div class="weather-info">
+            <p>Typical weather for then is:</p>
+            <p id="temperature" class="temperature">High: 46, Low: 35</p>
+            <p id="description" class="description">
+              Mostly cloudy throughout the day.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
