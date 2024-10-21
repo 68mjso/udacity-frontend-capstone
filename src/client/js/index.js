@@ -2,54 +2,61 @@ const serverURL = "http://localhost:8000";
 
 const inputSearchForm = document.getElementById("traveInputForm");
 const inputSearch = document.getElementById("inputSearch");
-const saveBtn = document.getElementById("saveTrip");
-const removeBtn = document.getElementById("removeTrip");
+const inputDate = document.getElementById("inputDate");
+const travelMain = document.getElementById("travelMain");
+// const saveBtn = document.getElementById("saveTrip");
+// const removeBtn = document.getElementById("removeTrip");
 
 inputSearchForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const inputText = inputSearch.value;
+  const rawDate = inputDate.value;
+  const plannedDate = new Date(rawDate + "T00:00").getTime();
   if (inputText.trim() === "" || !inputText) {
-    return;
-  }
-  const searchRes = await searchCity(inputText);
-  console.log(searchRes);
-});
-
-function handleSubmit(event) {
-  event.preventDefault();
-
-  // Get the URL from the input field
-  const formText = document.getElementById("name").value;
-
-  // This is an example code that checks the submitted name. You may remove it from your code
-  // checkForName(formText);
-
-  // Check if the URL is valid
-  if (formText.trim() === "") {
     alert("Missing Input");
     return;
   }
-
-  // If the URL is valid, send it to the server using the serverURL constant above
-  const data = new URLSearchParams();
-
-  data.append("input", formText);
-  submit(data);
-}
-
-// Function to send data to the server
-
-function submit(data) {
-  fetch(`${serverURL}/submit`, {
-    method: "POST",
-    body: data,
-  })
-    .then((res) => res.json())
-    .then(function (res) {
-      document.getElementById("results").innerHTML = res.message;
-    })
-    .catch((e) => alert(e));
-}
+  if (!plannedDate) {
+    alert("Missing Date");
+    return;
+  }
+  const diff = plannedDate - Date.now();
+  // Check user choose invalid future date
+  if (diff <= 0) {
+    alert("Please choose a future date.");
+    return;
+  }
+  // Convert millisecond to day
+  const diffDay = Math.ceil(diff / 24 / 60 / 60 / 1000);
+  const searchRes = await searchCityMock(inputText);
+  // const searchRes = await searchCity(inputText);
+  const { data } = searchRes;
+  // Get the future weather (max 7 days)
+  const weather = data.weather.data[diff > 7 ? 6 : diff - 1];
+  travelMain.style.padding = "1rem";
+  // append location to HTML
+  travelMain.innerHTML = `
+        <img
+          src=${data["pixa"]["webformatURL"]}
+        />
+        <div class="travel-details">
+          <h2>My trip to: ${data.name}, ${data.countryName}</h2>
+          <h2>Departing: ${rawDate}</h2>
+          <div class="buttons">
+            <button id="saveTrip">Save Trip</button>
+            <button id="removeTrip">Remove Trip</button>
+          </div>
+          <p>${data.name}, ${data.countryName} is ${diffDay} days away</p>
+          <div class="weather-info">
+            <p>Typical weather for then is:</p>
+            <p id="temperature" class="temperature">High: ${weather.high_temp}, Low: ${weather.low_temp}</p>
+            <p id="description" class="description">
+              Weather: ${weather.weather.description}
+            </p>
+          </div>
+        </div>
+  `;
+});
 
 function searchCity(input) {
   return new Promise((resolve, reject) => {
@@ -64,5 +71,18 @@ function searchCity(input) {
   });
 }
 
+function searchCityMock(input) {
+  return new Promise((resolve, reject) => {
+    fetch(`https://run.mocky.io/v3/eb7f6c67-cf08-473b-879f-87fa44983cd1`)
+      .then((res) => res.json())
+      .then(function (res) {
+        resolve(res);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+}
+
 // Export the handleSubmit function
-export { handleSubmit };
+export { searchCity };

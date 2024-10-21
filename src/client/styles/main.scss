@@ -5,7 +5,10 @@
   border: 1px solid #eee;
   background-color: #fbeaea;
   gap: 2rem;
-  align-items: center;
+  @media screen and (min-width: 600px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
   img {
     object-fit: cover;
     width: 200px;
@@ -35,9 +38,18 @@
   }
 }
 
-@media screen and (min-width: 600px) {
-  #travelMain {
+#traveInputForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  input {
+    width: 100%;
+  }
+  @media screen and (min-width: 600px) {
     flex-direction: row;
-    align-items: flex-start;
+    input {
+      width: auto;
+    }
   }
 }
