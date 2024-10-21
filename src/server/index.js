@@ -1,9 +1,7 @@
-var path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const axios = require("axios");
-const FormData = require("form-data");
 dotenv.config();
 
 const app = express();
@@ -93,4 +91,4 @@ function getPixaData(input) {
   return response;
 }
 
-// export { app };
+export { app };

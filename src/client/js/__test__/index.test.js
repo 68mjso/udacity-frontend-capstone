@@ -1,68 +1,29 @@
-/**
- * @jest-environment jsdom
- */
+const { searchCity } = require("../index");
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({ message: "Success" }),
-  })
-);
+// Mock the server URL
+const serverURL = "http://localhost:8000";
 
-const { handleSubmit } = require("../formHandler");
+// Mock the global fetch function
+global.fetch = jest.fn();
 
-describe("Form Handler", () => {
-  var form;
-  var input;
-  var results;
-
-  beforeEach(() => {
-    // Mocking DOM elements
-    document.body.innerHTML = `
-      <form id="urlForm">
-        <input type="text" id="name" value="" />
-        <div id="results"></div>
-      </form>
-    `;
-
-    form = document.getElementById("urlForm");
-    input = document.getElementById("name");
-    results = document.getElementById("results");
-
-    // Mock the alert function
-    global.alert = jest.fn();
-  });
-
+describe("searchCity", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it("Should call alert if input is empty", () => {
-    input.value = "";
-    const event = new Event("submit");
-    form.addEventListener("submit", handleSubmit);
+  it("should resolve with data when fetch is successful", async () => {
+    const mockResponse = { city: "New York" };
 
-    form.dispatchEvent(event);
-
-    expect(global.alert).toHaveBeenCalledWith("Missing Input");
-    expect(fetch).not.toHaveBeenCalled();
-  });
-
-  it("should submit the form when valid input is provided", async () => {
-    input.value =
-      "Main dishes were quite good, but desserts were too sweet for me.";
-
-    const event = new Event("submit");
-    form.addEventListener("submit", handleSubmit);
-
-    form.dispatchEvent(event);
-
-    await new Promise(process.nextTick);
-
-    expect(fetch).toHaveBeenCalledWith("http://localhost:8000/submit", {
-      method: "POST",
-      body: expect.any(URLSearchParams),
+    fetch.mockResolvedValueOnce({
+      json: jest.fn().mockResolvedValueOnce(mockResponse),
     });
 
-    expect(results.innerHTML).toBe("Success");
+    const result = await searchCity("New York");
+
+    expect(fetch).toHaveBeenCalledWith(
+      `${serverURL}/search-city?input=New York`
+    );
+
+    expect(result).toEqual(mockResponse);
   });
 });

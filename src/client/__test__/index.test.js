@@ -1,15 +1,21 @@
 /**
  * @jest-environment jsdom
  */
-const { handleSubmit } = require("../js/formHandler");
+const { searchCity } = require("../js/index");
 describe("Main JS file", () => {
   beforeEach(() => {
-    // Mocking DOM elements
     document.body.innerHTML = `
-      <form id="urlForm">
-        <input type="text" id="name" value="" />
-        <div id="results"></div>
-      </form>
+      <main>
+        <section id="travelInput">
+          <form id="traveInputForm">
+            <input id="inputSearch" placeholder="Enter a City" />
+            <input id="inputDate" type="date" placeholder="Choose a Date" />
+            <input type="submit" placeholder="Submit" />
+          </form>
+        </section>
+        <section id="travelMain">
+        </section>
+      </main>
     `;
 
     // Mock the alert function
@@ -20,7 +26,7 @@ describe("Main JS file", () => {
     jest.clearAllMocks();
   });
 
-  it("should import handleSubmit function", () => {
-    expect(handleSubmit).toBeDefined();
+  it("should import searchCity function", () => {
+    expect(searchCity).toBeDefined();
   });
 });
