@@ -1,7 +1,19 @@
 const serverURL = "http://localhost:8000";
 
+const inputSearchForm = document.getElementById("traveInputForm");
+const inputSearch = document.getElementById("inputSearch");
 const saveBtn = document.getElementById("saveTrip");
 const removeBtn = document.getElementById("removeTrip");
+
+inputSearchForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const inputText = inputSearch.value;
+  if (inputText.trim() === "" || !inputText) {
+    return;
+  }
+  const searchRes = await searchCity(inputText);
+  console.log(searchRes);
+});
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -37,6 +49,19 @@ function submit(data) {
       document.getElementById("results").innerHTML = res.message;
     })
     .catch((e) => alert(e));
+}
+
+function searchCity(input) {
+  return new Promise((resolve, reject) => {
+    fetch(`${serverURL}/search-city?input=${input}`)
+      .then((res) => res.json())
+      .then(function (res) {
+        resolve(res);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
 }
 
 // Export the handleSubmit function
