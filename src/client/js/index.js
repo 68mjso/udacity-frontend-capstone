@@ -29,8 +29,7 @@ if (inputSearchForm) {
     }
     // Convert millisecond to day
     const diffDay = Math.ceil(diff / 24 / 60 / 60 / 1000);
-    const searchRes = await searchCityMock(inputText);
-    // const searchRes = await searchCity(inputText);
+    const searchRes = await searchCity(inputText);
     const { data } = searchRes;
     // Get the future weather (max 7 days)
     const weather = data.weather.data[diff > 7 ? 6 : diff - 1];
@@ -72,19 +71,5 @@ function searchCity(input) {
       });
   });
 }
-
-function searchCityMock(input) {
-  return new Promise((resolve, reject) => {
-    fetch(`https://run.mocky.io/v3/eb7f6c67-cf08-473b-879f-87fa44983cd1`)
-      .then((res) => res.json())
-      .then(function (res) {
-        resolve(res);
-      })
-      .catch((e) => {
-        reject(e);
-      });
-  });
-}
-
 // Export the handleSubmit function
 export { searchCity };
