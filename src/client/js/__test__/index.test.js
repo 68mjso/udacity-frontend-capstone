@@ -3,18 +3,20 @@ const { searchCity } = require("../index");
 // Mock the server URL
 const serverURL = "http://localhost:8000";
 
-// Mock the global fetch function
-global.fetch = jest.fn();
-
 describe("searchCity", () => {
+  
+  beforeEach(() => {
+    global.fetch = jest.fn();
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it("should resolve with data when fetch is successful", async () => {
     const mockResponse = { city: "New York" };
-
     fetch.mockResolvedValueOnce({
+      status: 200,
       json: jest.fn().mockResolvedValueOnce(mockResponse),
     });
 
