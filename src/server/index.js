@@ -40,6 +40,12 @@ app.get("/search-city", async function (req, res, next) {
   }
   const geoRes = await getGeoData(input);
   const { geonames } = geoRes;
+  if (!geonames) {
+    var e = new Error("Error");
+    e.status = 400;
+    next(e);
+    return;
+  }
   let result = null;
   if (geonames.length > 0) {
     result = {

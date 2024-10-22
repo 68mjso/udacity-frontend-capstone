@@ -55,8 +55,8 @@ This project requires several API keys to work properly. You will need to create
 ### Sample .env file:
 ```bash
 GEONAMES_USERNAME=your_geonames_username
-WEATHERBIT_API_KEY=your_weatherbit_api_key
-PIXABAY_API_KEY=your_pixabay_api_key
+WEATHER_API_KEY=your_weatherbit_api_key
+PIXA_API=your_pixabay_api_key
 ```
 
 ## APIs Used
