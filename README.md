@@ -10,6 +10,10 @@ Welcome to the Trip Planner project! The app allows users to plan a trip by ente
 4. Dynamic Images: The app shows images of the destination using external APIs.
 5. Responsive Design: The app is responsive and works on various screen sizes.
 
+## Prerequisite
+
+- Node 16.17.0
+
 ## Installation
 
 1. Clone the repository:
