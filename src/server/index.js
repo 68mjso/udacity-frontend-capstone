@@ -90,5 +90,4 @@ function getPixaData(input) {
     .catch((err) => err);
   return response;
 }
-
-export { app };
+module.exports = { app };
