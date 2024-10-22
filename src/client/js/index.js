@@ -30,6 +30,10 @@ if (inputSearchForm) {
     // Convert millisecond to day
     const diffDay = Math.ceil(diff / 24 / 60 / 60 / 1000);
     const searchRes = await searchCity(inputText);
+    if (!searchRes) {
+      alert("Error finding location.");
+      return;
+    }
     const { data } = searchRes;
     // Get the future weather (max 7 days)
     const weather = data.weather.data[diff > 7 ? 6 : diff - 1];
@@ -62,7 +66,12 @@ if (inputSearchForm) {
 function searchCity(input) {
   return new Promise((resolve, reject) => {
     fetch(`${serverURL}/search-city?input=${input}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status !== 200) {
+          return null;
+        }
+        return res.json();
+      })
       .then(function (res) {
         resolve(res);
       })
