@@ -67,6 +67,7 @@ function searchCity(input) {
         resolve(res);
       })
       .catch((e) => {
+        console.log(e);
         reject(e);
       });
   });
